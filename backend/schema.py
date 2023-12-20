@@ -13,3 +13,6 @@ class User(UserBase):
     last_name: str
     company: str
     job_title: str
+
+    class Config:
+        orm_mode = True

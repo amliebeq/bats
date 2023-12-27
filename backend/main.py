@@ -10,8 +10,20 @@ async def root():
 
 @app.get("/users")
 async def get_users():
-    response = supabase_client.table("users").select("*").execute()
-    users = response.data
+    users_response = supabase_client.table("users").select("*").execute()
+    users = users_response.data
+
+    if users is not None:
+        all_applicants_response = supabase_client.table("applicants").select("*").execute()
+        all_applicants = all_applicants_response.data
+
+        applicants_by_user = {applicant['user_id']: [] for applicant in all_applicants}
+        for applicant in all_applicants:
+            applicants_by_user[applicant['user_id']].append(applicant)
+
+        for user in users:
+            user['applicants'] = applicants_by_user.get(user['id'], [])
+
     return users
 
 @app.post("/users")

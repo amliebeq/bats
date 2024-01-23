@@ -8,12 +8,6 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/applicants/{applicant_id}")
-async def get_applicant(applicant_id: str):
-    applicant_response = supabase_client.table("applicants").select("*").eq("id", applicant_id).execute()
-    applicant = applicant_response.data
-    return applicant
-
 @app.get("/users")
 async def get_users():
     users_response = supabase_client.table("users").select("*").execute()

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
 
 class User(BaseModel):
     first_name: str
@@ -14,6 +14,8 @@ class Applicant(BaseModel):
     phone_number: str
     recent_job: str
     email: str
+    resume_url: HttpUrl = None
+
 
 class Jobs(BaseModel):
     title: str
@@ -21,9 +23,4 @@ class Jobs(BaseModel):
     description: str
     location: str
     remote: bool
-
-
-def get_user_with_applicants(user_id: int):
-    user = supabase_client.table("User").select("*").eq("id", user_id).execute()
-    applicants = supabase_client.table("Applicant").select("*").eq("user_id", user_id).execute()
-    return user, applicants
+    user_id: int

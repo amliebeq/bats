@@ -1,7 +1,6 @@
 from models import User, Applicant
-from fastapi import FastAPI, UploadFile, File
 from db import supabase_client
-from typing import List
+from fastapi import FastAPI, UploadFile, File
 
 app = FastAPI()
 
@@ -73,6 +72,7 @@ async def update_user(user_id: str, updated_user_data: User):
     
 @app.post("/upload-resume/{applicant_id}")
 async def upload_resume(applicant_id: int, file: UploadFile = File(...)):
+
     resume_url, upload_response = await _upload_file_to_supabase(applicant_id, file)
     
     await _update_applicant_resume(applicant_id, resume_url)

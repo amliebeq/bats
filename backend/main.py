@@ -75,6 +75,22 @@ async def upload_resume(applicant_id: int, file: UploadFile = File(...)):
         "resume_url": resume_url
     }
 
+@app.get("/applicants/{applicant_id}")
+async def get_applicant(applicant_id: int):
+    applicant_response = supabase_client.table("applicants").select("*").eq('id', applicant_id).execute()
+    applicant_data = applicant_response.data
+    
+    if applicant_data:
+        applicant = applicant_data[0]
+
+        applicant_resumes_response = supabase_client.table("resumes").select("*").eq("applicant_id", applicant_id).execute()
+        user_applicants = applicant_resumes_response.data
+
+        applicant['resumes'] = user_applicants
+
+    return applicant
+
+
 async def _upload_file_to_supabase(applicant_id: int, file: UploadFile):
     bucket = 'applicants-resumes'
     file_path = f"resumes/{applicant_id}/{file.filename}"
@@ -88,9 +104,9 @@ async def _upload_file_to_supabase(applicant_id: int, file: UploadFile):
 
 
 async def _update_applicant_resume(applicant_id: int, resume_url: str):
-    update_query = supabase_client.table("applicants").update({"resume_url": resume_url}).eq("id", applicant_id)
+    post_query = supabase_client.table("resumes").insert({'applicant_id': applicant_id, 'resume': resume_url})
     try:
-        response = update_query.execute()
+        response = post_query.execute()
         if response.error:
             raise Exception(response.error.message)
         return {"message": "Applicant resume updated successfully"}

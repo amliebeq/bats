@@ -16,7 +16,7 @@ fake = Faker("en_US")
 #         "email": fake.email(),
 #     }
 
-# for _ in range(10):
+# for _ in range(1):
 #     user_data = generate_user_data()
 #     insert_query = supabase_client.table("users").insert(user_data)
 #     try:
@@ -33,10 +33,10 @@ fake = Faker("en_US")
 #         "description": fake.text(max_nb_chars=200),
 #         "location": fake.city(),
 #         "remote": fake.boolean(),
-#         "user_id": random.randint(1,10)
+#         "user_id": 1
 #     }
 
-# for _ in range(50):
+# for _ in range(10):
 #     job_data = generate_job_data()
 #     insert_query = supabase_client.table("jobs").insert(job_data)
 #     try:
@@ -48,10 +48,10 @@ fake = Faker("en_US")
 # def generate_list_data():
 #     return {
 #         "name": fake.job(),
-#         "user_id": random.randint(1,10)
+#         "user_id": 1
 #     }
 
-# for _ in range(50):
+# for _ in range(10):
 #     list_data = generate_list_data()
 #     insert_query = supabase_client.table("lists").insert(list_data)
 #     try:
@@ -66,13 +66,13 @@ def generate_applicant_data():
         "last_name": fake.last_name(),
         "phone_number": fake.phone_number(),
         "recent_job": fake.job(),
-        "user_id": random.randint(1, 10),
+        "user_id": 1,
         "email": fake.email(),
-        "job_id": random.randint(2013,2062),
-        "list_id": random.randint(501,550)
+        "job_id": random.randint(2063,2072),
+        "list_id": random.randint(1,10)
     }
 
-for _ in range(200):
+for _ in range(50):
     applicant_data = generate_applicant_data()
     insert_query = supabase_client.table("applicants").insert(applicant_data)
     try:

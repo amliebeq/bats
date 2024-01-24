@@ -3,6 +3,7 @@ anyio==4.2.0
 certifi==2023.11.17
 click==8.1.7
 deprecation==2.1.0
+Faker==22.5.0
 fastapi==0.109.0
 gotrue==2.1.0
 h11==0.14.0
@@ -10,8 +11,10 @@ httpcore==1.0.2
 httptools==0.6.1
 httpx==0.25.2
 idna==3.6
+killport==1.2.0
 packaging==23.2
 postgrest==0.15.0
+psutil==5.9.8
 pydantic==2.5.3
 pydantic_core==2.14.6
 python-dateutil==2.8.2

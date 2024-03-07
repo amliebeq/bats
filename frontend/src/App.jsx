@@ -7,6 +7,7 @@ import { JobsList } from './components/jobs/JobsList'
 import { HomePage } from './components/homePage/HomePage'
 import { NavBar } from './components/navigation/NavBar'
 import { JobDetail } from './components/jobs/JobDetail'
+import { ApplicantsList } from './components/applicants/ApplicantsList'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -31,8 +32,9 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route exact path='/' element={<HomePage />} />
-        <Route exact path='/jobs' element={<JobsList />} />
-        <Route exact path = '/jobs/:id' element={<JobDetail />} />
+        <Route exact path='jobs' element={<JobsList />} />
+        <Route exact path='applicants' element={<ApplicantsList />} />
+        <Route exact path = 'jobs/:id' element={<JobDetail />} />
       </Routes>
     </div>
     

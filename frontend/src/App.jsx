@@ -2,10 +2,11 @@ import { useEffect } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { userAdded } from './UserSlice'
+import { userAdded } from './redux/UserSlice'
 import { JobsList } from './components/jobs/JobsList'
 import { HomePage } from './components/homePage/HomePage'
 import { NavBar } from './components/navigation/NavBar'
+import { JobDetail } from './components/jobs/JobDetail'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -31,10 +32,11 @@ const App = () => {
       <Routes>
         <Route exact path='/' element={<HomePage />} />
         <Route exact path='/jobs' element={<JobsList />} />
+        <Route exact path = '/jobs/:id' element={<JobDetail />} />
       </Routes>
     </div>
     
   )
 }
 
-export default App
+export default App     
